@@ -2,5 +2,6 @@
 
 int main()
 {
-    std::cout << cv::getBuildInformation() << std::endl;
+    ImageAcquisition img;
+    img.ShowDummyImage();
 }

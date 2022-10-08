@@ -31,6 +31,15 @@ project "Sandbox"
 		staticruntime "On"
 		systemversion "latest"
 
+		links
+		{
+			"opencv_core",
+			"opencv_highgui",
+			"opencv_imgproc"
+		}
+
+		linkoptions { "`pkg-config opencv4 --libs`" }
+
 	filter "configurations:Debug"
 		defines "AUTO_DEBUG"
 		symbols "On"

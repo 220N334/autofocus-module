@@ -11,5 +11,5 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 
-include "AutoFocus/Autofocus.lua"
+include "AutoFocus/AutoFocus.lua"
 include "Sandbox/Sandbox.lua"

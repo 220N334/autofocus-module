@@ -28,9 +28,11 @@ project "AutoFocus"
 		staticruntime "On"
 		systemversion "latest"
 
-        links 
+        links
 		{
-			"opencv_core" 
+			"opencv_core",
+			"opencv_highgui",
+			"opencv_imgproc"
 		}
 
 	filter "configurations:Debug"
