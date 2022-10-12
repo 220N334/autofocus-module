@@ -1,5 +1,5 @@
 project "AutoFocus"
-	kind "StaticLib"
+	kind "SharedLib"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
@@ -15,7 +15,18 @@ project "AutoFocus"
 
 	includedirs
 	{
-		"src"
+		"src",
+		"vendor/opencv/include",
+	}
+
+	libdirs 
+	{ 
+		"vendor/opencv/lib"
+	}
+
+	links
+	{
+		"opencv_core", "opencv_highgui", "opencv_imgproc"
 	}
 
 	filter "system:windows"
@@ -27,13 +38,6 @@ project "AutoFocus"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
-
-        links
-		{
-			"opencv_core",
-			"opencv_highgui",
-			"opencv_imgproc"
-		}
 
 	filter "configurations:Debug"
 		defines "AUTO_DEBUG"

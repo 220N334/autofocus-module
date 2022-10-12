@@ -13,12 +13,13 @@ project "Sandbox"
 
 	includedirs
 	{
-		"%{wks.location}/AutoFocus/src"
+		"%{wks.location}/AutoFocus/src",
+		"%{wks.location}/AutoFocus/vendor/opencv/include"
 	}
 
 	links
 	{
-		"AutoFocus"
+		"AutoFocus", "opencv_core", "opencv_highgui", "opencv_imgproc"
 	}
 
 	filter "system:windows"
@@ -30,15 +31,6 @@ project "Sandbox"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
-
-		links
-		{
-			"opencv_core",
-			"opencv_highgui",
-			"opencv_imgproc"
-		}
-
-		linkoptions { "`pkg-config opencv4 --libs`" }
 
 	filter "configurations:Debug"
 		defines "AUTO_DEBUG"
