@@ -5,6 +5,9 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 
+#include <libcamera/libcamera.h>
+#include <lccv.hpp>
+
 class ImageAcquisition
 {
 public:

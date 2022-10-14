@@ -9,7 +9,7 @@ project "AutoFocus"
 
 	links
 	{
-		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs"
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "camera", "LCCV"
 	}
 
 	files
@@ -21,7 +21,9 @@ project "AutoFocus"
 	includedirs
 	{
 		"src",
-		"/usr/local/include/opencv4"
+		"/usr/local/include/opencv4",
+		"/usr/local/include/libcamera",
+		"vendor/LCCV/include"
 	}
 
 	filter "system:windows"

@@ -20,7 +20,10 @@ project "Sandbox"
 	includedirs
 	{
 		"%{wks.location}/AutoFocus/src",
-		"/usr/local/include/opencv4"
+		"/usr/local/include/opencv4",
+		"/usr/local/include/libcamera",
+		"%{wks.location}/AutoFocus/vendor/LCCV/include"
+
 	}
 
 	filter "system:windows"
