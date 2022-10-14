@@ -7,6 +7,11 @@ project "AutoFocus"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+	links
+	{
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs"
+	}
+
 	files
 	{
 		"src/**.h",
@@ -16,17 +21,7 @@ project "AutoFocus"
 	includedirs
 	{
 		"src",
-		"vendor/opencv/include",
-	}
-
-	libdirs 
-	{ 
-		"vendor/opencv/lib"
-	}
-
-	links
-	{
-		"opencv_core", "opencv_highgui", "opencv_imgproc"
+		"/usr/local/include/opencv4"
 	}
 
 	filter "system:windows"

@@ -16,13 +16,13 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Debug-linux-/Sandbox
   DEFINES += -DAUTO_DEBUG
-  INCLUDES += -I../AutoFocus/src -I../AutoFocus/vendor/opencv/include
+  INCLUDES += -I../AutoFocus/src -I/usr/local/include/opencv4
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Debug-linux-/AutoFocus/libAutoFocus.so -lopencv_core -lopencv_highgui -lopencv_imgproc
+  LIBS += ../bin/Debug-linux-/AutoFocus/libAutoFocus.so -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -ltbb
   LDDEPS += ../bin/Debug-linux-/AutoFocus/libAutoFocus.so
   ALL_LDFLAGS += $(LDFLAGS) -Wl,-rpath,'$$ORIGIN/../AutoFocus'
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -43,13 +43,13 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Release-linux-/Sandbox
   DEFINES += -DAUTO_RELEASE
-  INCLUDES += -I../AutoFocus/src -I../AutoFocus/vendor/opencv/include
+  INCLUDES += -I../AutoFocus/src -I/usr/local/include/opencv4
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../bin/Release-linux-/AutoFocus/libAutoFocus.so -lopencv_core -lopencv_highgui -lopencv_imgproc
+  LIBS += ../bin/Release-linux-/AutoFocus/libAutoFocus.so -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs -ltbb
   LDDEPS += ../bin/Release-linux-/AutoFocus/libAutoFocus.so
   ALL_LDFLAGS += $(LDFLAGS) -Wl,-rpath,'$$ORIGIN/../AutoFocus' -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)

@@ -16,15 +16,15 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/libAutoFocus.so
   OBJDIR = ../bin-int/Debug-linux-/AutoFocus
   DEFINES += -DAUTO_DEBUG
-  INCLUDES += -Isrc -Ivendor/opencv/include
+  INCLUDES += -Isrc -I/usr/local/include/opencv4
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -fPIC -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -fPIC -g -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lopencv_core -lopencv_highgui -lopencv_imgproc
+  LIBS += -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -Lvendor/opencv/lib -shared -Wl,-soname=libAutoFocus.so
+  ALL_LDFLAGS += $(LDFLAGS) -shared -Wl,-soname=libAutoFocus.so
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -43,15 +43,15 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/libAutoFocus.so
   OBJDIR = ../bin-int/Release-linux-/AutoFocus
   DEFINES += -DAUTO_RELEASE
-  INCLUDES += -Isrc -Ivendor/opencv/include
+  INCLUDES += -Isrc -I/usr/local/include/opencv4
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2 -fPIC -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -lopencv_core -lopencv_highgui -lopencv_imgproc
+  LIBS += -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_imgcodecs
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -Lvendor/opencv/lib -shared -Wl,-soname=libAutoFocus.so -s
+  ALL_LDFLAGS += $(LDFLAGS) -shared -Wl,-soname=libAutoFocus.so -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
