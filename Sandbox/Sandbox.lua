@@ -7,7 +7,7 @@ project "Sandbox"
 	
 	links
 	{
-		"AutoFocus", "opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "tbb"
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "camera", "LCCV","AutoFocus"
 	}
 
 	files
