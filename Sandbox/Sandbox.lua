@@ -21,7 +21,7 @@ project "Sandbox"
 	{
 		"%{wks.location}/AutoFocus/src",
 		"/usr/local/include/opencv4",
-		"/usr/local/include/libcamera",
+		"/usr/local/libcamera",
 		"%{wks.location}/AutoFocus/vendor/LCCV/include"
 
 	}

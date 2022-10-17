@@ -22,7 +22,7 @@ project "AutoFocus"
 	{
 		"src",
 		"/usr/local/include/opencv4",
-		"/usr/local/include/libcamera",
+		"/usr/local/libcamera",
 		"vendor/LCCV/include"
 	}
 
