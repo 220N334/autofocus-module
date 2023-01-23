@@ -1,6 +1,6 @@
 #include "ImageAcquisition.h"
 
-// using namespace cv;
+using namespace std;
 
 ImageAcquisition::ImageAcquisition()
 {
@@ -9,26 +9,30 @@ ImageAcquisition::ImageAcquisition()
 
 void ImageAcquisition::ShowDummyImage()
 {
-    // Mat img = imread("/home/cezeri/Desktop/unknown.png", IMREAD_COLOR);
-    // imshow("window", img);
-    // waitKey(0);
-
-    cv::Mat image;
-    lccv::PiCamera cam;
-    // //cam.options->width=4056;
-    // //cam.options->height=3040;
-    cam.options->photo_width=2028;
-    cam.options->photo_height=1520;
-    cam.options->verbose=true;
-    cv::namedWindow("Image",cv::WINDOW_NORMAL);
-    for(int i=0;i<10;i++){
-        std::cout<<i<<std::endl;
-        if(!cam.capturePhoto(image)){
-            std::cout<<"Camera error"<<std::endl;
-        }
-        cv::imshow("Image",image);
-        cv::waitKey(30);
-    }
-    cv::waitKey();
-    cv::destroyWindow("Image");
+	time_t timer_begin,timer_end;
+	raspicam::RaspiCam_Cv Camera;
+	cv::Mat image;
+	int nCount=100;
+	//set camera params
+	//Camera.set( CV_CAP_PROP_FORMAT, CV_8UC1 );
+	//Open camera
+	cout<<"Opening Camera..."<<endl;
+	if (!Camera.open()) {cerr<<"Error opening the camera"<<endl;}
+	//Start capture
+	cout<<"Capturing "<<nCount<<" frames ...."<<endl;
+	time ( &timer_begin );
+	for ( int i=0; i<nCount; i++ ) {
+		Camera.grab();
+		Camera.retrieve ( image);
+		if ( i%5==0 )  cout<<"\r captured "<<i<<" images"<<std::flush;
+	}
+	cout<<"Stop camera..."<<endl;
+	Camera.release();
+	//show time statistics
+	time ( &timer_end ); /* get current time; same as: timer = time(NULL)  */
+	double secondsElapsed = difftime ( timer_end,timer_begin );
+	cout<< secondsElapsed<<" seconds for "<< nCount<<"  frames : FPS = "<<  ( float ) ( ( float ) ( nCount ) /secondsElapsed ) <<endl;
+	//save image 
+	cv::imwrite("raspicam_cv_image.jpg",image);
+	cout << "Image saved at raspicam_cv_image.jpg" << endl;
 }
