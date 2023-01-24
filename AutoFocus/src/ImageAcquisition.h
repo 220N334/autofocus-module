@@ -6,8 +6,8 @@
 #include <opencv2/highgui.hpp>
 
 #include <fstream>
-#include <raspicam_cv.h>
-#include <raspicam.h>
+#include <raspicam/raspicam_cv.h>
+#include <raspicam/raspicam.h>
 #include <iostream>
 #include <unistd.h>
 #include <ctime>
