@@ -1,5 +1,5 @@
 project "AutoFocus"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "off"
@@ -9,7 +9,7 @@ project "AutoFocus"
 
 	links
 	{
-		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "camera", "LCCV"
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "RaspiCam"
 	}
 
 	files
@@ -22,8 +22,7 @@ project "AutoFocus"
 	{
 		"src",
 		"/usr/local/include/opencv4",
-		"/usr/local/libcamera",
-		"vendor/LCCV/include"
+		"vendor/RaspiCam/src/"
 	}
 
 	filter "system:windows"

@@ -7,7 +7,7 @@ project "Sandbox"
 	
 	links
 	{
-		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "camera", "LCCV","AutoFocus"
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "AutoFocus", "RaspiCam"
 	}
 
 	files
@@ -20,10 +20,8 @@ project "Sandbox"
 	includedirs
 	{
 		"%{wks.location}/AutoFocus/src",
-		"/usr/local/include/opencv4",
-		"/usr/local/libcamera",
-		"%{wks.location}/AutoFocus/vendor/LCCV/include"
-
+		"%{wks.location}/AutoFocus/vendor/RaspiCam/src/",
+		"/usr/local/include/opencv4"
 	}
 
 	filter "system:windows"

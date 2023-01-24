@@ -5,8 +5,12 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 
-//#include <libcamera/libcamera.h>
-#include <lccv.hpp>
+#include <fstream>
+#include <raspicam_cv.h>
+#include <raspicam.h>
+#include <iostream>
+#include <unistd.h>
+#include <ctime>
 
 class ImageAcquisition
 {
