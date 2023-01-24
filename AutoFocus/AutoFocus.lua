@@ -9,7 +9,7 @@ project "AutoFocus"
 
 	links
 	{
-		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "RaspiCam"
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "raspicam", "raspicam_cv"
 	}
 
 	files

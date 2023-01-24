@@ -7,7 +7,7 @@ project "Sandbox"
 	
 	links
 	{
-		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "AutoFocus", "RaspiCam"
+		"opencv_core", "opencv_highgui", "opencv_imgproc", "opencv_imgcodecs", "AutoFocus",  "raspicam", "raspicam_cv"
 	}
 
 	files
