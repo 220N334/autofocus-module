@@ -12,9 +12,13 @@
 #include <unistd.h>
 #include <ctime>
 
-class ImageAcquisition
+namespace Autofocus
 {
-public:
-    ImageAcquisition();
-    void ShowDummyImage();
-};
+    class ImageAcquisition
+    {
+    public:
+        ImageAcquisition();
+        void CaptureAndSaveDummyImage();
+        void CaptureImage(cv::Mat* frame);
+    };
+}
