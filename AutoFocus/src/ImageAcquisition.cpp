@@ -1,38 +1,56 @@
 #include "ImageAcquisition.h"
 
-using namespace std;
-
-ImageAcquisition::ImageAcquisition()
+namespace Autofocus
 {
+	ImageAcquisition::ImageAcquisition()
+	{
 
-}
-
-void ImageAcquisition::ShowDummyImage()
-{
-	time_t timer_begin,timer_end;
-	raspicam::RaspiCam_Cv Camera;
-	cv::Mat image;
-	int nCount=100;
-	//set camera params
-	//Camera.set( CV_CAP_PROP_FORMAT, CV_8UC1 );
-	//Open camera
-	cout<<"Opening Camera..."<<endl;
-	if (!Camera.open()) {cerr<<"Error opening the camera"<<endl;}
-	//Start capture
-	cout<<"Capturing "<<nCount<<" frames ...."<<endl;
-	time ( &timer_begin );
-	for ( int i=0; i<nCount; i++ ) {
-		Camera.grab();
-		Camera.retrieve ( image);
-		if ( i%5==0 )  cout<<"\r captured "<<i<<" images"<<std::flush;
 	}
-	cout<<"Stop camera..."<<endl;
-	Camera.release();
-	//show time statistics
-	time ( &timer_end ); /* get current time; same as: timer = time(NULL)  */
-	double secondsElapsed = difftime ( timer_end,timer_begin );
-	cout<< secondsElapsed<<" seconds for "<< nCount<<"  frames : FPS = "<<  ( float ) ( ( float ) ( nCount ) /secondsElapsed ) <<endl;
-	//save image 
-	cv::imwrite("raspicam_cv_image.jpg",image);
-	cout << "Image saved at raspicam_cv_image.jpg" << endl;
+
+	// Captures dummy image and measures FPS
+	void ImageAcquisition::CaptureAndSaveDummyImage()
+	{
+		time_t timer_begin,timer_end;
+		raspicam::RaspiCam_Cv Camera;
+		cv::Mat image;
+		int nCount=100;
+
+		//Camera.set( CV_CAP_PROP_FORMAT, CV_8UC1 );
+		std::cout << "Opening Camera..." << std::endl;
+		if (Camera.open()) 
+		{
+			//Start capture
+			std::cout << "Capturing " << nCount << " frames ...." << std::endl;
+			time ( &timer_begin );
+			for ( int i=0; i<nCount; i++ ) {
+				Camera.grab();
+				Camera.retrieve(image);
+				if ( i%5==0 )  std::cout<< "\r captured " << i << " images" <<std::flush;
+			}
+			std::cout << "Stop camera..." << std::endl;
+			Camera.release();
+			time(&timer_end);
+			double secondsElapsed = difftime(timer_end, timer_begin);
+			std::cout << secondsElapsed <<" seconds for "<< nCount << "  frames : FPS = " <<  ( float ) ( ( float ) ( nCount ) /secondsElapsed ) << std::endl;
+			cv::imwrite("raspicam_cv_image.jpg",image);
+			std::cout << "Image saved at raspicam_cv_image.jpg" << std::endl;
+		}
+		else
+		{
+			std::cerr << "Error opening the camera" << std::endl;
+		}
+	}
+
+	// Captures image on frame
+	void ImageAcquisition::CaptureImage(cv::Mat* frame)
+	{
+		raspicam::RaspiCam_Cv Camera;
+		if (Camera.open()) 
+		{
+			std::cout << "Camera Opening" << std::endl;
+			Camera.grab();
+			Camera.retrieve(*frame);
+			Camera.release();
+		}
+	}
 }
