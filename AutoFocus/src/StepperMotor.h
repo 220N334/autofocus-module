@@ -4,10 +4,9 @@ namespace Autofocus
 {
     struct StepperPins
     {
-        unsigned int in1;
-        unsigned int in2;
-        unsigned int in3;
-        unsigned int in4;
+        unsigned int step;
+        unsigned int en;
+        unsigned int dir;
     };
     
     class StepperMotor
@@ -17,6 +16,8 @@ namespace Autofocus
         void SetGPIOPins(StepperPins pins);
         void RunMotor(int direction, unsigned int step, unsigned int speed);
         inline StepperPins GetGPIO() { return m_pins; }
+    private:
+        void SetupPins();
     private:
         StepperPins m_pins;
     };
