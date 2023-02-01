@@ -45,12 +45,15 @@ namespace Autofocus
 	void ImageAcquisition::CaptureImage(cv::Mat* frame)
 	{
 		raspicam::RaspiCam_Cv Camera;
+		std::cout << "Opening Camera..." << std::endl;
+
 		if (Camera.open()) 
 		{
-			std::cout << "Camera Opening" << std::endl;
+			//Start capture
 			Camera.grab();
 			Camera.retrieve(*frame);
 			Camera.release();
+			cv::imwrite("img.jpg", *frame);
 		}
 	}
 }

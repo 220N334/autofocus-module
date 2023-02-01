@@ -35,5 +35,22 @@ namespace Autofocus
         pinMode (m_pins.dir, OUTPUT);
         pinMode (m_pins.step, OUTPUT);
         pinMode (m_pins.en, OUTPUT);
+
+        if(m_pins.ms1 && m_pins.ms2)
+        {
+            m_stepFactor = 1.8f / 16.0f;
+        }
+        else if(!m_pins.ms1 && !m_pins.ms2)
+        {
+            m_stepFactor = 1.8f / 8.0f;
+        }
+        else if(!m_pins.ms1 && m_pins.ms2)
+        {
+            m_stepFactor = 1.8f / 4.0f;
+        }
+        else if(m_pins.ms1 && !m_pins.ms2)
+        {
+            m_stepFactor = 1.8f / 2.0f;
+        }
     }
 }

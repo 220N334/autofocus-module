@@ -7,6 +7,8 @@ namespace Autofocus
         unsigned int step;
         unsigned int en;
         unsigned int dir;
+        bool ms1;
+        bool ms2;
     };
     
     class StepperMotor
@@ -20,5 +22,6 @@ namespace Autofocus
         void SetupPins();
     private:
         StepperPins m_pins;
+        float m_stepFactor;
     };
 }
