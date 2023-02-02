@@ -1,5 +1,8 @@
 #include "StepperMotor.h"
 
+#include <chrono>
+#include <iostream>
+
 namespace Autofocus
 {
     StepperMotor::StepperMotor(StepperPins pins)
@@ -14,18 +17,25 @@ namespace Autofocus
         SetupPins();
     }
 
-    void StepperMotor::RunMotor(int direction, unsigned int step, unsigned int speed)
+    void StepperMotor::RunMotor(int direction, unsigned int angle, unsigned int speed)
     {
         digitalWrite(m_pins.en, LOW);
-        digitalWrite(m_pins.dir, LOW);
+        digitalWrite(m_pins.dir, direction);
+
+        int step = angle / m_stepFactor;
+        //auto start = std::chrono::high_resolution_clock::now();
+        float delayMs = ((speed / (360 / m_stepFactor)) / 2) * 1000;
 
         for (int i = 0; i < step; i++)
         {
             digitalWrite(m_pins.step, HIGH);
-            delay(0.5f);
+            delayMicroseconds(delayMs);
             digitalWrite(m_pins.step, LOW);
-            delay(0.5f);
+            delayMicroseconds(delayMs);
         }
+        //auto stop = std::chrono::high_resolution_clock::now();
+        //auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+        std::cout << "Time taken by motor: " << duration.count() << " microseconds" << std::endl;
         digitalWrite(m_pins.en, HIGH);
     }
 

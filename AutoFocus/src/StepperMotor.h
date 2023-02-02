@@ -16,7 +16,7 @@ namespace Autofocus
     public:
         StepperMotor(StepperPins pins);
         void SetGPIOPins(StepperPins pins);
-        void RunMotor(int direction, unsigned int step, unsigned int speed);
+        void RunMotor(int direction, unsigned int angle, unsigned int speed);
         inline StepperPins GetGPIO() { return m_pins; }
     private:
         void SetupPins();

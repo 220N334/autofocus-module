@@ -49,11 +49,12 @@ namespace Autofocus
 
 		if (Camera.open()) 
 		{
-			//Start capture
-			Camera.grab();
-			Camera.retrieve(*frame);
+			for (int i = 0; i < 10; i++)
+			{
+				Camera.grab();
+				Camera.retrieve(*frame);
+			}
 			Camera.release();
-			cv::imwrite("img.jpg", *frame);
 		}
 	}
 }

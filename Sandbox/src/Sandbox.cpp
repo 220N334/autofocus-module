@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     // For now 1 rotation = 1600 step
     // std::thread worker(&Autofocus::StepperMotor::RunMotor, std::ref(motor1), 1, 32000, 100);
     // worker.join();
-    //motor1.RunMotor(1, 8000, 100);
+    // motor1.RunMotor(1, 8000, 100);
 
     while(true)
     {
@@ -45,7 +45,11 @@ int main(int argc, char* argv[])
             std::cout << "Write motor direction 1/0" << std::endl;
             int dir;
             std::cin >> dir;
-            motor1.RunMotor(dir, step, 100);
+
+            std::cout << "Write motor speed angle/microsec" << std::endl;
+            int speed;
+            std::cin >> speed;
+            motor1.RunMotor(dir, step, speed);
         }
     }
 
