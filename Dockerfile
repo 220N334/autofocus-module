@@ -1,20 +1,17 @@
-FROM scratch
-ADD mynewimage.tar /
-RUN docker load < /mynewimage.tar
+FROM chtakyol/autofocus-module
 
-RUN git clone https://github.com/220N334/raspicam.git
-WORKDIR raspicam
-RUN mkdir build
-WORKDIR build
-RUN cmake ..
-RUN make
-RUN make install
-RUN ldconfig
+RUN apt-get install -y uuid-dev
 
+RUN git clone https://github.com/premake/premake-core.git
+WORKDIR premake-core
+RUN make -f Bootstrap.mak linux
+ENV PATH="$PATH:/premake-core/bin/release"
 WORKDIR /
 
 WORKDIR autofocus-module
 COPY . .
-WORKDIR scripts
-RUN bash GenerateProjectArm.sh
-RUN bash RunProjectArm.sh
+# RUN premake5 gmake
+# RUN make
+
+CMD ["bash", "dockerstart.sh"]
+# CMD ["bash"]

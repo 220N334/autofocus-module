@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  autofocus:
+    build: .
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    user: root
+    devices:
+      - "/dev/vchiq"
+      - "/dev/gpiomem:/dev/gpiomem"
+    volumes:
+      - /opt/vc:/opt/vc
+    environment:
+      - LD_LIBRARY_PATH=/opt/vc/lib
