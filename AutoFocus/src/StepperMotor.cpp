@@ -35,7 +35,7 @@ namespace Autofocus
         }
         //auto stop = std::chrono::high_resolution_clock::now();
         //auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
-        std::cout << "Time taken by motor: " << duration.count() << " microseconds" << std::endl;
+        //std::cout << "Time taken by motor: " << duration.count() << " microseconds" << std::endl;
         digitalWrite(m_pins.en, HIGH);
     }
 
