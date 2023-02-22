@@ -21,6 +21,7 @@ namespace Autofocus
         ImageAcquisition();
         void CaptureAndSaveDummyImage();
         void CaptureImage(cv::Mat* frame);
+        void ResizeImage(cv::Mat* frame, int resizeWidth, int resizeHeigth);
     private:
         raspicam::RaspiCam_Still_Cv m_camera;
     };

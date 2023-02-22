@@ -1,4 +1,5 @@
 #include "ImageAcquisition.h"
+#include "ctime"
 
 namespace Autofocus
 {
@@ -46,18 +47,26 @@ namespace Autofocus
 	{
 		std::cout << "Opening Camera..." << std::endl;
 
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 1; i++)
 		{
 			if (m_camera.open()) 
 			{
-				for (int i = 0; i < 10; i++)
-				{
-					m_camera.grab();
-					m_camera.retrieve(*frame);
-				}
+				sleep(3);
+				// for (int i = 0; i < 10; i++)
+				// {
+				// 	m_camera.grab();
+				// 	m_camera.retrieve(*frame);
+				// }
+				m_camera.grab();
+				m_camera.retrieve(*frame);
 				m_camera.release();
 				break;
 			}
 		}
+	}
+
+	void ImageAcquisition::ResizeImage(cv::Mat* frame, int resizeWidth, int resizeHeigth)
+	{
+		cv::resize(*frame, *frame, cv::Size(resizeWidth, resizeHeigth), cv::INTER_LINEAR);
 	}
 }
