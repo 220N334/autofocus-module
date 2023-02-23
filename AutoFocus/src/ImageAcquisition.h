@@ -20,8 +20,13 @@ namespace Autofocus
     public:
         ImageAcquisition();
         void CaptureAndSaveDummyImage();
-        void CaptureImage(cv::Mat* frame);
+        void OpenCaptureRelease(cv::Mat* frame);
         void ResizeImage(cv::Mat* frame, int resizeWidth, int resizeHeigth);
+        
+        bool OpenCamera();
+        void CaptureImage(cv::Mat* frame);
+        inline void ReleaseCamera() {m_camera.release();}
+        
     private:
         raspicam::RaspiCam_Still_Cv m_camera;
     };

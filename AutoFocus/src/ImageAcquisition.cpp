@@ -8,7 +8,6 @@ namespace Autofocus
 
 	}
 
-	// Captures dummy image and measures FPS
 	void ImageAcquisition::CaptureAndSaveDummyImage()
 	{
 		time_t timer_begin,timer_end;
@@ -42,8 +41,7 @@ namespace Autofocus
 		}
 	}
 
-	// Captures image on frame
-	void ImageAcquisition::CaptureImage(cv::Mat* frame)
+	void ImageAcquisition::OpenCaptureRelease(cv::Mat* frame)
 	{
 		std::cout << "Opening Camera..." << std::endl;
 
@@ -52,17 +50,29 @@ namespace Autofocus
 			if (m_camera.open()) 
 			{
 				sleep(3);
-				// for (int i = 0; i < 10; i++)
-				// {
-				// 	m_camera.grab();
-				// 	m_camera.retrieve(*frame);
-				// }
 				m_camera.grab();
 				m_camera.retrieve(*frame);
 				m_camera.release();
 				break;
 			}
 		}
+	}
+
+	bool ImageAcquisition::OpenCamera()
+	{
+		if(m_camera.open())
+		{
+			std::cout << "Camera Opened..." << std::endl;
+			sleep(3);
+			return true;
+		}
+		return false;
+	}
+	
+	void ImageAcquisition::CaptureImage(cv::Mat* frame)
+	{
+		m_camera.grab();
+		m_camera.retrieve(*frame);
 	}
 
 	void ImageAcquisition::ResizeImage(cv::Mat* frame, int resizeWidth, int resizeHeigth)
