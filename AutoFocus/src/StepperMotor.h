@@ -20,6 +20,7 @@ namespace Autofocus
         inline StepperPins GetGPIO() { return m_pins; }
     private:
         void SetupPins();
+        float SpeedTransition(float delay, int currentStep, int totalStep); 
     private:
         StepperPins m_pins;
         float m_stepFactor;
