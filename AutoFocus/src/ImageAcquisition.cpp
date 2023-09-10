@@ -60,6 +60,8 @@ namespace Autofocus
 
 	bool ImageAcquisition::OpenCamera()
 	{
+		m_camera.set ( cv::CAP_PROP_FRAME_WIDTH, 400 );
+    	m_camera.set ( cv::CAP_PROP_FRAME_HEIGHT, 300 );
 		if(m_camera.open())
 		{
 			std::cout << "Camera Opened..." << std::endl;
@@ -69,14 +71,32 @@ namespace Autofocus
 		return false;
 	}
 	
+	void ImageAcquisition::StreamThread(cv::Mat* frame)
+	{
+		if (streamThread != nullptr)
+		{
+			streamThread->join();
+			delete(streamThread);
+		}
+		streamThread = new std::thread(&ImageAcquisition::StreamLoop, this, frame);
+	}
+
 	void ImageAcquisition::CaptureImage(cv::Mat* frame)
 	{
 		m_camera.grab();
 		m_camera.retrieve(*frame);
 	}
 
-	void ImageAcquisition::ResizeImage(cv::Mat* frame, int resizeWidth, int resizeHeigth)
+	void ImageAcquisition::StreamLoop(cv::Mat* frame)
 	{
-		cv::resize(*frame, *frame, cv::Size(resizeWidth, resizeHeigth), cv::INTER_LINEAR);
+		while(true)
+		{
+			CaptureImage(frame);
+		}
+	}
+
+	void ImageAcquisition::ResizeImage(cv::Mat* frameIn, cv::Mat* frameOut, int resizeWidth, int resizeHeigth)
+	{
+		cv::resize(*frameIn, *frameOut, cv::Size(resizeWidth, resizeHeigth), cv::INTER_LINEAR);
 	}
 }

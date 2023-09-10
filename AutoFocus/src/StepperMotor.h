@@ -1,4 +1,5 @@
 #include <wiringPi.h>
+#include <thread>
 
 namespace Autofocus
 {
@@ -17,6 +18,7 @@ namespace Autofocus
         StepperMotor(StepperPins pins);
         void SetGPIOPins(StepperPins pins);
         void RunMotor(int direction, unsigned int angle, unsigned int speed);
+        void RunMotorInThread(int direction, unsigned int angle, unsigned int speed);
         inline StepperPins GetGPIO() { return m_pins; }
     private:
         void SetupPins();
@@ -24,5 +26,6 @@ namespace Autofocus
     private:
         StepperPins m_pins;
         float m_stepFactor;
+        std::thread* stepperThread = nullptr;
     };
 }

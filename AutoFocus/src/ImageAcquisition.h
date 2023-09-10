@@ -12,6 +12,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <ctime>
+#include <thread>
 
 namespace Autofocus
 {
@@ -21,13 +22,16 @@ namespace Autofocus
         ImageAcquisition();
         void CaptureAndSaveDummyImage();
         void OpenCaptureRelease(cv::Mat* frame);
-        void ResizeImage(cv::Mat* frame, int resizeWidth, int resizeHeigth);
+        void ResizeImage(cv::Mat* frameIn, cv::Mat* frameOut, int resizeWidth, int resizeHeigth);
         
         bool OpenCamera();
+        void StreamThread(cv::Mat* frame);
         void CaptureImage(cv::Mat* frame);
+        void StreamLoop(cv::Mat* frame);
         inline void ReleaseCamera() {m_camera.release();}
         
     private:
         raspicam::RaspiCam_Still_Cv m_camera;
+        std::thread* streamThread = nullptr;
     };
 }

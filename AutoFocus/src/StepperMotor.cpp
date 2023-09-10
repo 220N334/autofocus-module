@@ -9,6 +9,14 @@ namespace Autofocus
         : m_pins(pins)
     {
         SetupPins();
+        
+        // if (stepperThread != nullptr)
+		// {
+		// 	stepperThread->join();
+		// 	delete(stepperThread);
+		// }
+
+        // stepperThread = new std::thread(&StepperMotor::ThreadDummy, this, std::ref(m_pins.step));
     }
 
     void StepperMotor::SetGPIOPins(StepperPins pins)
@@ -37,6 +45,16 @@ namespace Autofocus
         //auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
         //std::cout << "Time taken by motor: " << duration.count() << " microseconds" << std::endl;
         digitalWrite(m_pins.en, HIGH);
+    }
+
+    void StepperMotor::RunMotorInThread(int direction, unsigned int angle, unsigned int speed)
+    {
+        if (stepperThread != nullptr)
+		{
+			stepperThread->join();
+			delete(stepperThread);
+		}
+        stepperThread = new std::thread(&StepperMotor::RunMotor, this, std::ref(direction), std::ref(angle), std::ref(speed));
     }
 
     void StepperMotor::SetupPins()
