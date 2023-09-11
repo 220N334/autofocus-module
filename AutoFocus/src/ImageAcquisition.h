@@ -20,6 +20,7 @@ namespace Autofocus
     {
     public:
         ImageAcquisition();
+        ~ImageAcquisition();
         void CaptureAndSaveDummyImage();
         void OpenCaptureRelease(cv::Mat* frame);
         void ResizeImage(cv::Mat* frameIn, cv::Mat* frameOut, int resizeWidth, int resizeHeigth);
@@ -33,5 +34,6 @@ namespace Autofocus
     private:
         raspicam::RaspiCam_Still_Cv m_camera;
         std::thread* streamThread = nullptr;
+        bool m_running = true;
     };
 }

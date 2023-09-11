@@ -8,6 +8,11 @@ namespace Autofocus
 
 	}
 
+	ImageAcquisition::~ImageAcquisition()
+	{
+		m_running = false;
+	}
+
 	void ImageAcquisition::CaptureAndSaveDummyImage()
 	{
 		time_t timer_begin,timer_end;
@@ -89,7 +94,7 @@ namespace Autofocus
 
 	void ImageAcquisition::StreamLoop(cv::Mat* frame)
 	{
-		while(true)
+		while(m_running)
 		{
 			CaptureImage(frame);
 		}
